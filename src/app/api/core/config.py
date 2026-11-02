@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     FRONTEND_HOST: str = "http://localhost:5173"
     FASTAPI_ENV: Literal["development"] | None = None
 
-    SENTRY_DSN: HttpUrl | None # คืออะไรติดไว้ก่อน
+    SENTRY_DSN: HttpUrl | None = None# คืออะไรติดไว้ก่อน
     # ขั้นที่ 3 ตรวจสอบว่า url เป็นแบบไหน ใช่ "postgres://", "postgresql://" ถ้าใช่ จะเปลี่ยนเป็น postgresql+psycopg:// แทน
     DATABASE_URL: str = "sqlite:///./app.db" # PostgresDsn
     
@@ -37,9 +37,9 @@ class Settings(BaseSettings):
         return database_url
     @model_validator(mode="after") #@model_validator คือ ใช้หลายฟิวล์ มาเปลี่ยนค่าหรือทำอะไรสักอย่าง
     def set_default_email(self) -> Self:
-        if not Self.EMAILS_FROM_NAME:
-            Self.EMAILS_FROM_NAME = Self.PROJECT_NAME
-        return Self
+        if not self.EMAILS_FROM_NAME:
+            self.EMAILS_FROM_NAME = self.PROJECT_NAME
+        return self
         
     # ขั้นที่ 6     
     SMTP_TLS: bool = True
