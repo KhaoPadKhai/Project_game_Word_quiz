@@ -1,11 +1,13 @@
 import warnings
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Literal, Self
 from pydantic import EmailStr, HttpUrl, field_validator, model_validator, computed_field
 
+ENV_FILE = Path(__file__).resolve().parents[4] / ".env"
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=ENV_FILE,
         env_ignore_empty=True,
         extra="ignore"
     )

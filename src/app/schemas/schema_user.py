@@ -1,3 +1,5 @@
+import uuid
+from datetime import datetime
 from sqlmodel import SQLModel, Field
 from pydantic import EmailStr
 
@@ -15,3 +17,7 @@ class UserRegister(SQLModel):
     email: EmailStr = Field(max_length=255)
     password: str = Field(min_length=8, max_length=128)
     full_name: str | None = Field(default=None, max_length=255)
+
+class UserPublic(UserBase):
+    id: uuid.UUID
+    created_at: datetime | None = None
