@@ -6,7 +6,7 @@ from pydantic import EmailStr
 class UserBase(SQLModel):
     email: EmailStr = Field(index=True, nullable=False, unique=True)
     is_active: bool = Field(default=True, nullable=False)
-    is_superuser: bool = Field(default=False, nullable=False)
+    is_superuser: bool = False
     full_name: str | None = Field(default=None, max_length=255)
 
 
