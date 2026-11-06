@@ -1,9 +1,14 @@
 from datetime import datetime, UTC, timedelta
+from fastapi.security import OAuth2PasswordBearer
 import jwt
 from typing import Any
 from pwdlib import PasswordHash
 from pwdlib.hashers.argon2 import Argon2Hasher
 from app.api.core.config import settings
+
+reusable_oauth2 = OAuth2PasswordBearer(
+    tokenUrl=f"{settings.API_V1_STR}/login/access-token"
+)
 
 password_hash = PasswordHash((Argon2Hasher(),))
 
