@@ -15,3 +15,4 @@ class User(UserBase, table=True):
         default_factory=get_datetime_utc,
         sa_type=DateTime(timezone=True), 
     )
+    
